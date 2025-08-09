@@ -6,20 +6,6 @@ from nltk.tokenize import word_tokenize
 import warnings
 warnings.filterwarnings('ignore')
 
-def download_nltk_resources():
-    resources = {
-        "tokenizers/punkt": "punkt",
-        "tokenizers/punkt_tab": "punkt_tab"
-    }
-    for resource_path, resource_name in resources.items():
-        try:
-            nltk.data.find(resource_path)
-            print(f"resourse '{resource_name}' is already downloaded.")
-        except LookupError:
-            print(f"resourse '{resource_name}' was not found. Downloading...")
-            nltk.download(resource_name, quiet=True)
-            print(f"Downloading '{resource_name}' complete.")
-
 def main():
     download_nltk_resources()
 
@@ -36,6 +22,20 @@ def main():
         print(f'\nModel was saved in {MODEL_PATH} file')
 
         demonstrate_model(w2v_model)
+
+def download_nltk_resources():
+    resources = {
+        "tokenizers/punkt": "punkt",
+        "tokenizers/punkt_tab": "punkt_tab"
+    }
+    for resource_path, resource_name in resources.items():
+        try:
+            nltk.data.find(resource_path)
+            print(f"resourse '{resource_name}' is already downloaded.")
+        except LookupError:
+            print(f"resourse '{resource_name}' was not found. Downloading...")
+            nltk.download(resource_name, quiet=True)
+            print(f"Downloading '{resource_name}' complete.")
 
 def preprocess_chat_data(file_path, text_column):
     print(f'loading and processing "{file_path}" file...')
